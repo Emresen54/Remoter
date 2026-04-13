@@ -9,6 +9,7 @@ export default function App() {
   const [status, setStatus] = useState("Unconnected");
   const [token, setToken] = useState("");
   const [text, setText] = useState("");
+  const [lastSentText, setLastSentText] = useState("");
 
   const isTrackingRef = useRef(false);
   const gestureModeRef = useRef("move");
@@ -168,9 +169,18 @@ export default function App() {
   };
 
   const sendText = () => {
-   if (!text.trim()) return;
-   sendCommand("type_text", { text });
-  };  
+    const trimmed = text.trim();
+    if (!trimmed) return;
+
+    sendCommand("type_text", { text });
+    setLastSentText(text);
+    setText("");
+  };
+
+  const restoreLastText = () => {
+    if (!lastSentText) return;
+    setText(lastSentText);
+  };
 
   const sendKey = (key) => {
     sendCommand("press_key", { key });
@@ -213,9 +223,19 @@ export default function App() {
             disabled={!connected}
           />
 
-          <button className="send-btn" onClick={sendText} disabled={!connected}>
-            Send Text
-          </button>
+          <div className="text-actions">
+            <button className="send-btn" onClick={sendText} disabled={!connected}>
+              Send Text
+            </button>
+
+            <button
+              className="restore-btn"
+              onClick={restoreLastText}
+              disabled={!connected || !lastSentText}
+            >
+              Restore Last Text
+            </button>
+          </div>
 
           <div className="key-grid">
             <button onClick={() => sendKey("enter")} disabled={!connected}>
