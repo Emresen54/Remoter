@@ -1,6 +1,6 @@
 # Remoter
 
-Remoter is a lightweight remote control tool that allows you to control your PC from your phone, tablet, or another device via a browser.
+Remoter is a lightweight remote control tool that lets you control your PC from your phone, tablet, or another device using a browser.
 
 ## Features
 
@@ -9,17 +9,21 @@ Remoter is a lightweight remote control tool that allows you to control your PC 
 - Two-finger scrolling
 - Keyboard input (text + special keys)
 - Fast text input via clipboard
+- Clear-after-send text behavior
+- Restore last sent text
 - Token-based authentication
 - Dynamic session token (changes on each start)
 - Automatic local IP detection
 - QR code connection
-- Built-in admin panel
+- Built-in admin dashboard
+- Live connection status (connected devices)
+- Copy URL / Copy Token buttons
 - Single-port architecture (no separate frontend server)
 
 ## How it works
 
 1. Start the server on your PC
-2. A browser window opens automatically (admin panel)
+2. Admin page opens automatically in your browser
 3. Scan the QR code or open the URL on your phone/tablet
 4. Enter the session token
 5. Control your PC remotely
@@ -28,16 +32,16 @@ Remoter is a lightweight remote control tool that allows you to control your PC 
 
 - Node.js (server)
 - Express
-- Socket.IO (real-time communication)
-- React (frontend)
-- QRCode (connection sharing)
+- Socket.IO
+- React
+- QRCode
 
 ## Notes
 
 - Works over local network (same Wi-Fi)
-- Each session generates a new access token
+- Each session generates a new token
 - No installation required for client devices (browser-based)
 
 ## Status
 
-V2 – Stable local remote control with admin UI and QR connection
+V3 – Stable version with admin UI, QR connection, connection tracking and improved text handling
