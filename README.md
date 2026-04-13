@@ -1,63 +1,27 @@
 # Remoter
 
-Remoter is a lightweight remote control tool that allows you to control your PC using your phone or tablet through a browser.
-
-No installation required – just run the executable and connect instantly using a QR code.
-
----
+Remoter is a lightweight remote control tool that lets you control your PC from your phone or tablet using a browser.
 
 ## Features
 
-- Mouse control (move, left click, right click)
-- Fast keyboard input (clipboard-based typing)
-- Two-finger scroll support
-- Mobile-friendly control interface
-- Dynamic session token for secure access
-- QR code instant connection
-- Works over local network (no internet required)
+- Touchpad-style mouse control
+- Left / Right click support
+- Two-finger scrolling
+- Keyboard input
+- Fast text input
+- QR auto-connect
+- Dynamic session token
+- Admin dashboard
+- Works over local network
 
----
+## Download
+
+Download the latest portable release from the GitHub Releases page.
 
 ## Usage
 
-1. Start `RemoterServer.exe`
-2. Admin page will open automatically
-3. Scan the QR code or open the provided URL on your phone
-4. Start controlling your PC
-
----
-
-## Requirements
-
-- Both devices must be connected to the same network
-- Windows Defender may ask for permission (allow it)
-
----
-
-## Notes
-
-- Designed for personal use and lightweight remote control
-- No external server or cloud required
-- All communication stays within your local network
-
----
-
-## Version
-
-Current version: v1.0.0
-
----
-
-## Tech Stack
-
-- Node.js
-- Express
-- Socket.IO
-- React (frontend)
-- nut.js (mouse & keyboard control)
-
----
-
-## License
-
-MIT License
+1. Extract the ZIP file
+2. Run `start-remoter.bat`
+3. Admin page opens automatically
+4. Scan the QR code or open the shown URL
+5. Control your PC remotely
