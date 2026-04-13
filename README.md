@@ -15,6 +15,7 @@ Remoter is a lightweight remote control tool that lets you control your PC from 
 - Dynamic session token (changes on each start)
 - Automatic local IP detection
 - QR code connection
+- QR auto-connect (token included in URL)
 - Built-in admin dashboard
 - Live connection status (connected devices)
 - Copy URL / Copy Token buttons
@@ -23,10 +24,11 @@ Remoter is a lightweight remote control tool that lets you control your PC from 
 ## How it works
 
 1. Start the server on your PC
-2. Admin page opens automatically in your browser
-3. Scan the QR code or open the URL on your phone/tablet
-4. Enter the session token
-5. Control your PC remotely
+2. Admin page opens automatically
+3. Scan the QR code OR open the URL manually
+4. If opened via QR → connects automatically
+5. If opened manually → enter token
+6. Control your PC remotely
 
 ## Tech Stack
 
@@ -40,8 +42,9 @@ Remoter is a lightweight remote control tool that lets you control your PC from 
 
 - Works over local network (same Wi-Fi)
 - Each session generates a new token
-- No installation required for client devices (browser-based)
+- QR code contains the token for faster connection
+- No installation required for client devices
 
 ## Status
 
-V3 – Stable version with admin UI, QR connection, connection tracking and improved text handling
+V4 – Stable version with QR auto-connect, admin UI, and improved UX
