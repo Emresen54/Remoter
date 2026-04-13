@@ -1,23 +1,28 @@
 {
-  "name": "server",
+  "name": "remoter-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
+  "bin": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "build:exe": "pkg . --targets node18-win-x64 --output dist/RemoterServer.exe"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "@nut-tree-fork/nut-js": "^4.2.6",
-    "clipboardy": "^5.3.1",
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "open": "^11.0.0",
+    "@nut-tree-fork/nut-js": "^4.1.0",
+    "clipboardy": "^4.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "open": "^10.1.0",
     "qrcode": "^1.5.4",
-    "socket.io": "^4.8.3"
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
+  },
+  "pkg": {
+    "assets": [
+      "../web/dist/**/*"
+    ]
   }
 }
