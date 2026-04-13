@@ -1,50 +1,63 @@
 # Remoter
 
-Remoter is a lightweight remote control tool that lets you control your PC from your phone, tablet, or another device using a browser.
+Remoter is a lightweight remote control tool that allows you to control your PC using your phone or tablet through a browser.
+
+No installation required – just run the executable and connect instantly using a QR code.
+
+---
 
 ## Features
 
-- Touchpad-style mouse control
-- Left / Right click support
-- Two-finger scrolling
-- Keyboard input (text + special keys)
-- Fast text input via clipboard
-- Clear-after-send text behavior
-- Restore last sent text
-- Token-based authentication
-- Dynamic session token (changes on each start)
-- Automatic local IP detection
-- QR code connection
-- QR auto-connect (token included in URL)
-- Built-in admin dashboard
-- Live connection status (connected devices)
-- Copy URL / Copy Token buttons
-- Single-port architecture (no separate frontend server)
+- Mouse control (move, left click, right click)
+- Fast keyboard input (clipboard-based typing)
+- Two-finger scroll support
+- Mobile-friendly control interface
+- Dynamic session token for secure access
+- QR code instant connection
+- Works over local network (no internet required)
 
-## How it works
+---
 
-1. Start the server on your PC
-2. Admin page opens automatically
-3. Scan the QR code OR open the URL manually
-4. If opened via QR → connects automatically
-5. If opened manually → enter token
-6. Control your PC remotely
+## Usage
 
-## Tech Stack
+1. Start `RemoterServer.exe`
+2. Admin page will open automatically
+3. Scan the QR code or open the provided URL on your phone
+4. Start controlling your PC
 
-- Node.js (server)
-- Express
-- Socket.IO
-- React
-- QRCode
+---
+
+## Requirements
+
+- Both devices must be connected to the same network
+- Windows Defender may ask for permission (allow it)
+
+---
 
 ## Notes
 
-- Works over local network (same Wi-Fi)
-- Each session generates a new token
-- QR code contains the token for faster connection
-- No installation required for client devices
+- Designed for personal use and lightweight remote control
+- No external server or cloud required
+- All communication stays within your local network
 
-## Status
+---
 
-V4 – Stable version with QR auto-connect, admin UI, and improved UX
+## Version
+
+Current version: v1.0.0
+
+---
+
+## Tech Stack
+
+- Node.js
+- Express
+- Socket.IO
+- React (frontend)
+- nut.js (mouse & keyboard control)
+
+---
+
+## License
+
+MIT License
