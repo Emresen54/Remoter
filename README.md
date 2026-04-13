@@ -25,3 +25,23 @@ Download the latest portable release from the GitHub Releases page.
 3. Admin page opens automatically
 4. Scan the QR code or open the shown URL
 5. Control your PC remotely
+
+## Optional: Create a Shortcut
+
+If you want faster access, you can create a shortcut for `start-remoter.bat`.
+
+### Desktop shortcut
+- Right-click `start-remoter.bat`
+- Click **Show more options**
+- Select **Send to > Desktop (create shortcut)**
+
+### Make it searchable in Windows Start / Search
+1. Press `Win + R`
+2. Type:
+
+   shell:programs
+
+3. Copy a shortcut of `start-remoter.bat` into that folder
+4. Rename the shortcut to **Remoter**
+
+Now you can search for **Remoter** in the Windows Start menu.
