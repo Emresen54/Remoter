@@ -7,7 +7,7 @@ const os = require("os");
 const path = require("path");
 const fs = require("fs");
 const QRCode = require("qrcode");
-const open = require("open").default;
+const { exec } = require("child_process");
 const { Server } = require("socket.io");
 const { handleCommand } = require("./inputController");
 
@@ -27,6 +27,21 @@ const io = new Server(server, {
 
 function generateToken() {
   return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
+function openBrowser(url) {
+  try {
+    if (process.platform === "win32") {
+      exec(`start "" "${url}"`);
+    } else if (process.platform === "darwin") {
+      exec(`open "${url}"`);
+    } else {
+      exec(`xdg-open "${url}"`);
+    }
+  } catch (err) {
+    console.log("Could not open browser automatically.");
+    console.log("Open manually:", url);
+  }
 }
 
 function getLocalIPv4Addresses() {
@@ -235,14 +250,6 @@ button:hover {
   max-width: 220px;
 }
 
-.small {
-  margin-top: 12px;
-  color: #bdbdbd;
-  font-size: 14px;
-  line-height: 1.5;
-  word-break: break-word;
-}
-
 @media (max-width: 760px) {
   .card {
     margin: 16px;
@@ -293,11 +300,10 @@ button:hover {
       <div class="label">QR Code</div>
       <div class="qr-wrapper">
         <div class="qr">
-          <img id="qr" />
+          <img id="qr" alt="QR Code" />
         </div>
         <div class="qr-url" id="qrUrlText"></div>
       </div>
-      <div class="small" id="qrUrlText"></div>
     </div>
   </div>
 </div>
@@ -412,12 +418,12 @@ async function startServer() {
     res.sendFile(path.join(distPath, "index.html"));
   });
 
-  server.listen(PORT, "0.0.0.0", async () => {
+  server.listen(PORT, "0.0.0.0", () => {
     console.log("Remoter started");
     console.log("URL:", remoteUrl);
     console.log("Token:", SESSION_TOKEN);
 
-    await open(adminUrl);
+    openBrowser(adminUrl);
   });
 }
 

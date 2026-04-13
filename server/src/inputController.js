@@ -1,9 +1,24 @@
 const { mouse, keyboard, Button, Key } = require("@nut-tree-fork/nut-js");
-const clipboardyModule = require("clipboardy");
-const clipboard = clipboardyModule.default || clipboardyModule;
+const { execSync } = require("child_process");
 
 const MOUSE_SENSITIVITY = 2;
 const SCROLL_SENSITIVITY = 4;
+
+function writeToClipboardWindows(text) {
+  const safeText = String(text ?? "");
+
+  execSync("clip", {
+    input: safeText,
+    stdio: ["pipe", "ignore", "ignore"],
+  });
+}
+
+async function pasteClipboard() {
+  await keyboard.pressKey(Key.LeftControl);
+  await keyboard.pressKey(Key.V);
+  await keyboard.releaseKey(Key.V);
+  await keyboard.releaseKey(Key.LeftControl);
+}
 
 async function handleCommand(payload) {
   const { type, data } = payload || {};
@@ -59,14 +74,9 @@ async function handleCommand(payload) {
       if (!text) return;
 
       try {
-        await clipboard.write(text);
-
+        writeToClipboardWindows(text);
         await new Promise((resolve) => setTimeout(resolve, 120));
-
-        await keyboard.pressKey(Key.LeftControl);
-        await keyboard.pressKey(Key.V);
-        await keyboard.releaseKey(Key.V);
-        await keyboard.releaseKey(Key.LeftControl);
+        await pasteClipboard();
       } catch (err) {
         console.error("Clipboard paste failed, fallback to slow typing:", err.message);
         await keyboard.type(text);

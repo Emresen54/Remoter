@@ -5,20 +5,19 @@
   "bin": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "build:exe": "pkg . --targets node18-win-x64 --output dist/RemoterServer.exe"
+    "build:exe": "pkg . --targets node18-win-x64 --icon icon.ico --output dist/RemoterServer.exe"
   },
   "dependencies": {
     "@nut-tree-fork/nut-js": "^4.1.0",
-    "clipboardy": "^4.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
-    "open": "^10.1.0",
     "qrcode": "^1.5.4",
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
-    "pkg": "^5.8.1"
+    "pkg": "^5.8.1",
+    "rcedit": "^5.0.2"
   },
   "pkg": {
     "assets": [
