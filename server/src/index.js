@@ -290,7 +290,7 @@ function buildAdminHtml() {
         document.getElementById("remoteUrl").textContent = data.remoteUrl;
         document.getElementById("tokenValue").textContent = data.token;
         document.getElementById("qrImage").src = data.qrDataUrl;
-        document.getElementById("qrUrlText").textContent = data.remoteUrl;
+        document.getElementById("qrUrlText").textContent = data.qrConnectUrl;
 
         updateConnectionStatus(data.connectedClients);
       } catch (err) {
@@ -381,14 +381,16 @@ async function startServer() {
   const bestIP = pickBestAddress(addresses);
 
   const remoteUrl = `http://${bestIP.address}:${PORT}`;
+  const qrConnectUrl = `${remoteUrl}/?token=${SESSION_TOKEN}`;
   const adminUrl = `http://localhost:${PORT}/admin`;
-  const qrDataUrl = await QRCode.toDataURL(remoteUrl.trim());
+  const qrDataUrl = await QRCode.toDataURL(qrConnectUrl.trim());
 
   app.get("/api/server-info", (req, res) => {
     res.json({
       port: PORT,
       token: SESSION_TOKEN,
       remoteUrl,
+      qrConnectUrl,
       adminUrl,
       qrDataUrl,
       connectedClients,

@@ -2,12 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 
 const SERVER_URL = `http://${window.location.hostname}:3001`;
+const urlParams = new URLSearchParams(window.location.search);
+const tokenFromUrl = urlParams.get("token") || "";
 
 export default function App() {
   const [socket, setSocket] = useState(null);
   const [connected, setConnected] = useState(false);
   const [status, setStatus] = useState("Unconnected");
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(tokenFromUrl);
   const [text, setText] = useState("");
   const [lastSentText, setLastSentText] = useState("");
 
@@ -24,8 +26,10 @@ export default function App() {
     };
   }, [socket]);
 
-  const connectToServer = () => {
-    if (!token.trim()) {
+  const connectToServer = (customToken) => {
+    const finalToken = (customToken ?? token).trim();
+
+    if (!finalToken) {
       setStatus("Token required");
       return;
     }
@@ -41,7 +45,7 @@ export default function App() {
 
     newSocket.on("connect", () => {
       setStatus("Connected to server, authenticating...");
-      newSocket.emit("authenticate", token.trim());
+      newSocket.emit("authenticate", finalToken);
     });
 
     newSocket.on("auth_ok", () => {
@@ -66,6 +70,13 @@ export default function App() {
 
     setSocket(newSocket);
   };
+
+  useEffect(() => {
+    if (tokenFromUrl) {
+      setStatus("Token detected in URL, connecting...");
+      connectToServer(tokenFromUrl);
+    }
+  }, []);
 
   const disconnectFromServer = () => {
     if (socket) {
@@ -200,7 +211,7 @@ export default function App() {
           />
 
           {!connected ? (
-            <button onClick={connectToServer}>Connect</button>
+            <button onClick={() => connectToServer()}>Connect</button>
           ) : (
             <button onClick={disconnectFromServer}>Disconnect</button>
           )}
